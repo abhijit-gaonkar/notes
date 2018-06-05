@@ -6,22 +6,22 @@ use Notes\Core\Models\AbstractModel;
 
 class NotesModel extends AbstractModel
 {
-    function createNote($requestObj, $user)
+    function createNote()
     {
 
     }
 
-    function retrieveNote($requestObj, $user)
+    function retrieveNote()
     {
 
     }
 
-    function updateNote($requestObj, $user)
+    function updateNote()
     {
 
     }
 
-    function deleteNote($requestObj, $user)
+    function deleteNote()
     {
 
     }

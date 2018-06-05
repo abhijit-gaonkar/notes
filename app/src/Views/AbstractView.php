@@ -5,7 +5,7 @@ namespace Notes\Core\Views;
 use Exception;
 use JsonSerializable;
 
-abstract class AbstractApi implements JsonSerializable
+abstract class AbstractView implements JsonSerializable
 {
     public function __construct(array $properties = [])
     {

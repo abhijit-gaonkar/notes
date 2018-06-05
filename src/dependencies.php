@@ -12,5 +12,9 @@ $container['logger'] = function (ContainerInterface $container) {
     return $logger;
 };
 
+$container[Notes\Services\Models\NotesModel::class] = function (ContainerInterface $container){
+    return new Notes\Services\Models\NotesModel($container);
+};
+
 
 
