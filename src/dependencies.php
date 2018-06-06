@@ -1,5 +1,6 @@
 <?php
 use Psr\Container\ContainerInterface;
+use Notes\Core\Database\ConnectDb;
 // DIC configuration
 $container = $app->getContainer();
 
@@ -16,5 +17,8 @@ $container[Notes\Services\Models\NotesModel::class] = function (ContainerInterfa
     return new Notes\Services\Models\NotesModel($container);
 };
 
+$container["pdoObject"] = function(ContainerInterface $container){
+    return ConnectDb::getInstance();
+};
 
 
