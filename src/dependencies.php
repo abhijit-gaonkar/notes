@@ -1,6 +1,7 @@
 <?php
 use Psr\Container\ContainerInterface;
 use Notes\Core\Database\ConnectDb;
+use Notes\Core\Validators\JsonValidator;
 // DIC configuration
 $container = $app->getContainer();
 
@@ -21,4 +22,7 @@ $container["pdoObject"] = function(ContainerInterface $container){
     return ConnectDb::getInstance();
 };
 
+$container['jsonValidator'] = function (DI $container) {
+    return new JsonValidator();
+};
 
