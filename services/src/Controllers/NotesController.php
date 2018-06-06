@@ -26,12 +26,15 @@ class NotesController extends AbstractController
     {
         $notesObj = $this->di->get(Models\NotesModel::class);
         if ($notesObj->retrieveNote()) {
-            $status = 404;
+            $status = 200;
             $headers = ['Content-Type' => 'application/json; charset=utf-8'];
             $response = new Response($status, $headers, json_encode(new Views\Success()));
             return $response;
         } else {
-
+            $status = 400;
+            $headers = ['Content-Type' => 'application/json; charset=utf-8'];
+            $response = new Response($status, $headers, json_encode(new Views\Success()));
+            return $response;
         }
     }
 
