@@ -22,7 +22,7 @@ $container["pdoObject"] = function(ContainerInterface $container){
     return ConnectDb::getInstance();
 };
 
-$container['jsonValidator'] = function (DI $container) {
+$container['jsonValidator'] = function (ContainerInterface $container) {
     return new JsonValidator();
 };
 

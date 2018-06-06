@@ -18,14 +18,14 @@ class NotesController extends AbstractController
 
         $headers = ['Content-Type' => 'application/json; charset=utf-8'];
 
-        $schema = __DIR__  . "../Schemas/Notes.json";
-        if (!$jsonValidator->validate($schema, $request)) {
+        $schema = __DIR__  . "/../Schemas/Notes.json";
+        if (!$jsonValidator->validate($schema, $request->getParsedBody())) {
             $status = 400;
             $response = new Response($status, $headers, Errors\Notes::UNABLE_TO_CREATE_NOTE($jsonValidator->getErrors()));
             return $response;
         }
 
-        if ($notesObj->createNote()) {
+        if ($notesObj->createNote($request->getParsedBody(),1)) {
             $status = 201;
             $response = new Response($status, $headers, json_encode(new Views\Success()));
             return $response;
@@ -54,7 +54,7 @@ class NotesController extends AbstractController
     function updateNote($request, $response, $args)
     {
         $notesObj = $this->di->get(Models\NotesModel::class);
-        if ($notesObj->updateNote()) {
+        if ($notesObj->updateNote($request->getParsedBody(),1,1)) {
 
         } else {
             //TODO: return 403 if note does not belong to user.
@@ -69,7 +69,7 @@ class NotesController extends AbstractController
     function deleteNote($request, $response, $args)
     {
         $notesObj = $this->di->get(Models\NotesModel::class);
-        if ($notesObj->deleteNote()) {
+        if ($notesObj->deleteNote(1,1)) {
             //TODO: return 200 if note is deleted succesfully
         } else {
             //TODO: return 403 if note does not belong to user

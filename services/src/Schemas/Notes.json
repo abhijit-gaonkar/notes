@@ -6,7 +6,7 @@
       "type": "string",
       "maxLength": 50
     },
-    "note":{
+    "content":{
       "required": true,
       "type": "string",
       "maxLength": 1000
