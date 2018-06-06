@@ -18,6 +18,10 @@ $container[Notes\Services\Models\NotesModel::class] = function (ContainerInterfa
     return new Notes\Services\Models\NotesModel($container);
 };
 
+$container[Notes\Services\Models\UserModel::class] = function (ContainerInterface $container){
+    return new Notes\Services\Models\UserModel($container);
+};
+
 $container["pdoObject"] = function(ContainerInterface $container){
     return ConnectDb::getInstance();
 };

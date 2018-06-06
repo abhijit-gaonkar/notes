@@ -8,9 +8,9 @@ class Note extends AbstractView
 {
     public $title;
 
-    public $note;
+    public $content;
 
-    public $created_by;
+    public $created;
 
-    public $last_update;
+    public $last_updated;
 }

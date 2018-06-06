@@ -3,13 +3,18 @@
 namespace Notes\Services\Models;
 
 use Notes\Core\Models\AbstractModel;
-
 use \PDO;
 
 class NotesModel extends AbstractModel
 {
+    /**
+     * @param $request
+     * @param $userId
+     * @return string
+     */
     function createNote($request, $userId)
     {
+        /** @var \PDO $pdo */
         $pdo = $this->di->get("pdoObject")->getConnection();
 
         $sql = "INSERT INTO notes(title,content,user_id) VALUES(:title,:content,:userId)";
@@ -19,51 +24,64 @@ class NotesModel extends AbstractModel
         $stmt->bindParam(':content', $request['content'], PDO::PARAM_STR);
         $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
         //TODO: try catch and return 500 if issue with execution
-        try {
-            $result = $stmt->execute();
-        } catch (\PDOException $e) {
-
-        }
-
+        $stmt->execute();
+        return $pdo->lastInsertId();
     }
 
-    function retrieveNote($userId, $notesId = 1)
+    /**
+     * @param $request
+     * @param $userId
+     * @return string
+     */
+    function retrieveNote($userId, $notesId)
     {
         /** @var \PDO $pdo */
         $pdo = $this->di->get("pdoObject")->getConnection();
 
         $stmt = $pdo->prepare("SELECT * FROM notes where user_id = ? and id = ?");
         if ($stmt->execute(array($userId, $notesId))) {
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                print_r($row);
-            }
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return false;
         }
     }
 
+    /**
+     * @param $request
+     * @param $userId
+     * @return string
+     */
     function updateNote($request, $userId, $notesId)
     {
+        /** @var \PDO $pdo */
         $pdo = $this->di->get("pdoObject")->getConnection();
 
-        $sql = "UPDATE movies SET title = :title,content = :content where user_id= :userId and notes_id= :notesId";
+        $sql = "UPDATE notes SET title = :title,content = :content,updated = now() where user_id=:userId and id=:notesId";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':title', $request['title'], PDO::PARAM_STR);
         $stmt->bindParam(':content', $request['content'], PDO::PARAM_STR);
         $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
         $stmt->bindParam(':notesId', $notesId, PDO::PARAM_INT);
         //TODO: try catch and return 500 if issue with execution
-        $stmt->execute();
+        return $stmt->execute();
     }
 
+    /**
+     * @param $request
+     * @param $userId
+     * @return string
+     */
     function deleteNote($userId, $notesId)
     {
+        /** @var \PDO $pdo */
         $pdo = $this->di->get("pdoObject")->getConnection();
 
-        $sql = "DELETE FROM movies WHERE user_id = :userId and id = :notesId";
+        $sql = "DELETE FROM notes WHERE user_id = :userId and id = :notesId";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
         $stmt->bindParam(':notesId', $notesId, PDO::PARAM_INT);
         //TODO: try catch and return 500 if issue with execution
-        $stmt->execute();
+        return $stmt->execute();
     }
 
 }

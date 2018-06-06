@@ -6,8 +6,8 @@ use Notes\Services\Models;
 // RoutesMo
 $app->post('/notes', Controllers\NotesController::class . ':createNote') ;
 
-$app->put('/notes', Controllers\NotesController::class . ':updateNote');
+$app->put('/notes/{notes_id}', Controllers\NotesController::class . ':updateNote');
 
-$app->get('/notes', Controllers\NotesController::class . ':retrieveNote');
+$app->get('/notes/{notes_id}', Controllers\NotesController::class . ':retrieveNote');
 
-$app->delete('/notes', Controllers\NotesController::class . ':deleteNote');
+$app->delete('/notes/{notes_id}', Controllers\NotesController::class . ':deleteNote');

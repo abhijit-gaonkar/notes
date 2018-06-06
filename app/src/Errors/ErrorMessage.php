@@ -13,4 +13,9 @@ class ErrorMessage {
         $this->errorCode = $errorCode;
         $this->errorMessage = $errorMessage;
     }
+
+    function __tostring()
+    {
+        return json_encode($this);
+    }
 }

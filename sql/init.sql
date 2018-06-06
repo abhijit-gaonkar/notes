@@ -35,5 +35,5 @@ CREATE TABLE notes (
 ALTER TABLE user
 ADD UNIQUE (email);
 
-insert into user (email,password) values ('test@test.com','test');
-insert into user (email,password) values ('test@test1.com','test');
+insert into user (email,password) values ('test@test.com','$2y$10$hBkwykLtATwazpWoNvc3OuWD/oBEvbCWDXA2PghZHnCRmC55..SVu');
+insert into user (email,password) values ('test@test1.com','$2y$10$hBkwykLtATwazpWoNvc3OuWD/oBEvbCWDXA2PghZHnCRmC55..SVu');
