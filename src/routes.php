@@ -1,13 +1,11 @@
 <?php
 
-use Notes\Services\Controllers;
-use Notes\Services\Models;
+$app->post('/notes', ['\\Notes\\Services\\Controllers\\NotesController','createNote']) ;
 
-// RoutesMo
-$app->post('/notes', Controllers\NotesController::class . ':createNote') ;
+$app->put('/notes/{notes_id}', ['\\Notes\\Services\\Controllers\\NotesController','updateNote']);
 
-$app->put('/notes/{notes_id}', Controllers\NotesController::class . ':updateNote');
+$app->get('/notes/{notes_id}', ['\\Notes\\Services\\Controllers\\NotesController','retrieveNote']);
 
-$app->get('/notes/{notes_id}', Controllers\NotesController::class . ':retrieveNote');
+$app->get('/notes', ['\\Notes\\Services\\Controllers\\NotesController','retrieveAllNotes']);
 
-$app->delete('/notes/{notes_id}', Controllers\NotesController::class . ':deleteNote');
+$app->delete('/notes/{notes_id}', ['\\Notes\\Services\\Controllers\\NotesController','deleteNote']);

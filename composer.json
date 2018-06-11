@@ -14,7 +14,8 @@
     "monolog/monolog": "^1.7",
     "justinrainbow/json-schema": "1.4.4",
     "guzzlehttp/psr7": "1.4.2",
-    "tuupola/slim-basic-auth": "^3.0"
+    "tuupola/slim-basic-auth": "^3.0",
+    "php-di/slim-bridge": "^2.0"
   },
   "autoload": {
     "psr-4": {

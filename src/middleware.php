@@ -1,14 +1,13 @@
 <?php
 
 use Tuupola\Middleware\HttpBasicAuthentication\PdoAuthenticator;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use Notes\Core\Database;
 
 $app->add(new Tuupola\Middleware\HttpBasicAuthentication([
     "path" => "/notes",
     "realm" => "Protected",
     "authenticator" => new PdoAuthenticator([
-    "pdo" => $app->getContainer()->get("pdoObject")->getConnection(),
+    "pdo" => Database\ConnectDb::getInstance()->getConnection(),
     "user" => "email",
     "hash" => "password",
     "table" => "user"
